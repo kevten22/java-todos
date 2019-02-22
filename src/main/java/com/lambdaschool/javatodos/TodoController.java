@@ -7,12 +7,11 @@ import com.lambdaschool.javatodos.repositories.TodoRepository;
 import com.lambdaschool.javatodos.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -76,6 +75,16 @@ public class TodoController {
     @GetMapping("/todos/active")
     public List<Todo> activeTodos(){
         return todorepos.findByCompleted(1);
+    }
+
+    @PostMapping("/users")
+    public User newUser(@RequestBody User user) throws URISyntaxException{
+        return userrepos.save(user);
+    }
+
+    @PostMapping("/todo")
+    public Todo newTodo(@RequestBody Todo todo) throws URISyntaxException{
+        return todorepos.save(todo);
     }
 
 
