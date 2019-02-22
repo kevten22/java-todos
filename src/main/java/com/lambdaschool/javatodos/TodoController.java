@@ -122,6 +122,30 @@ public class TodoController {
         }
     }
 
+    @DeleteMapping("/users/userid/{userid}")
+    public User deleteUser(@PathVariable int id){
+        var foundUser = userrepos.findById(id);
+        if(foundUser != null){
+            userrepos.deleteByUserid(id);
+            return foundUser;
+        }
+
+        else
+            return null;
+    }
+
+    @DeleteMapping("/todos/todoid/{todoid}")
+    public Todo deleteTodo(@PathVariable int id){
+        var foundTodo = todorepos.findById(id);
+        if(foundTodo != null){
+            todorepos.deleteByTodoid(id);
+            return foundTodo;
+        }
+
+        else
+            return null;
+    }
+
 
 
 
