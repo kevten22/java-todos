@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="todo")
@@ -17,9 +18,9 @@ public class Todo {
     @Column(nullable = false)
     private String description;
 
-    private DateTimeFormat datestarted;
+    private Date datestarted;
 
-    private boolean completed;
+    private int completed;
 
     @ManyToOne
     @JoinColumn(name = "user", nullable=false)
@@ -45,19 +46,19 @@ public class Todo {
         this.description = description;
     }
 
-    public DateTimeFormat getDatestarted() {
+    public Date getDatestarted() {
         return datestarted;
     }
 
-    public void setDatestarted(DateTimeFormat datestarted) {
+    public void setDatestarted(Date datestarted) {
         this.datestarted = datestarted;
     }
 
-    public boolean isCompleted() {
+    public int isCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(int completed) {
         this.completed = completed;
     }
 
