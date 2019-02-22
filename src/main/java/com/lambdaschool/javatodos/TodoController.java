@@ -13,6 +13,7 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = {}, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -85,6 +86,40 @@ public class TodoController {
     @PostMapping("/todo")
     public Todo newTodo(@RequestBody Todo todo) throws URISyntaxException{
         return todorepos.save(todo);
+    }
+
+    @PutMapping("/users/userid/{userid}")
+    public User changeUser(@RequestBody User newuser, @PathVariable int id){
+
+        User updateUser = userrepos.findById(id);
+        if(updateUser != null){
+            newuser.setUserid(id);
+            userrepos.save(newuser);
+
+            return newuser;
+        }
+
+        else
+        {
+            return null;
+        }
+    }
+
+    @PutMapping("/todos/todoid/{todoid}")
+    public Todo changeTodo(@RequestBody Todo newtodo, @PathVariable int id){
+
+        Todo updateTodo = todorepos.findById(id);
+        if(updateTodo != null){
+            newtodo.setTodoid(id);
+            todorepos.save(newtodo);
+
+            return newtodo;
+        }
+
+        else
+        {
+            return null;
+        }
     }
 
 
